@@ -22,6 +22,9 @@ export function Home() {
             type="number"
             id="minuteAmount"
             placeholder="00"
+            min="5"
+            max="60"
+            step="5"
           />
           <span>minutos</span>
         </FormContainer>
