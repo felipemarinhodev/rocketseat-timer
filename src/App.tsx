@@ -1,5 +1,6 @@
 import {ThemeProvider} from "styled-components";
 import {defaultTheme} from "./styles/themes/default";
+import {GlobalStyle} from "./styles/global";
 
 export function App() {
 
@@ -7,6 +8,7 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
 
     <h1>lalala</h1>
+      <GlobalStyle />
     </ThemeProvider>
   )
 }
