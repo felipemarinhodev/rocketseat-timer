@@ -28,6 +28,7 @@ export function Home() {
     handleSubmit,
     watch,
     // formState
+    reset,
   } = useForm<newCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
@@ -40,6 +41,7 @@ export function Home() {
 
   function handleCreateNewCycle(data: newCycleFormData) {
     console.log(data)
+    reset()
   }
 
   // TODO: Create an error space to show the problems
