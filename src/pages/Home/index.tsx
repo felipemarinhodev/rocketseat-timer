@@ -92,6 +92,12 @@ export function Home() {
   const [tensMinutes, onesMinutes] = String(minutesAmount).padStart(2, '0')
   const [tensSeconds, onesSeconds] = String(secondsAmount).padStart(2, '0')
 
+  useEffect(() => {
+    if (activeCycle) {
+      document.title = `${tensMinutes}${onesMinutes}:${tensSeconds}${onesSeconds}`
+    }
+  }, [tensMinutes, onesMinutes, tensSeconds, onesSeconds, activeCycle])
+
   // TODO: Create an error space to show the problems
   // if (formState.errors) console.log(formState.errors)
 
