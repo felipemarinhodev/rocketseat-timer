@@ -39,7 +39,7 @@ export function Home() {
     handleSubmit,
     watch,
     // formState
-    // reset,
+    reset,
   } = newCycleForm
 
   const task = watch('task')
@@ -48,9 +48,15 @@ export function Home() {
   // TODO: Create an error space to show the problems
   // if (formState.errors) console.log(formState.errors)
 
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    console.log('handleCreateNewCycle')
+    createNewCycle(data)
+    reset()
+  }
+
   return (
     <HomeContainer>
-      <form action="" onSubmit={handleSubmit(createNewCycle)}>
+      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
