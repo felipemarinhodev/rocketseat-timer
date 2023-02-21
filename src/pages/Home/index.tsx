@@ -49,7 +49,6 @@ export function Home() {
   // if (formState.errors) console.log(formState.errors)
 
   function handleCreateNewCycle(data: NewCycleFormData) {
-    console.log('handleCreateNewCycle')
     createNewCycle(data)
     reset()
   }
