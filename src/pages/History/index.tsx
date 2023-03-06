@@ -21,29 +21,30 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            {cycles.map((cycle) => (
-              <tr key={cycle.id}>
-                <td>{cycle.task}</td>
-                <td>{cycle.minutesAmount} minutos</td>
-                <td>
-                  {formatDistanceToNow(cycle.startDate, {
-                    addSuffix: true,
-                    locale: ptBR,
-                  })}
-                </td>
-                <td>
-                  {cycle.finishedDate && (
-                    <Status statusColor="green">Concluído</Status>
-                  )}
-                  {cycle.interruptedDate && (
-                    <Status statusColor="red">Interrompido</Status>
-                  )}
-                  {!cycle.finishedDate && !cycle.interruptedDate && (
-                    <Status statusColor="yellow">Em andamento</Status>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {cycles &&
+              cycles.map((cycle) => (
+                <tr key={cycle.id}>
+                  <td>{cycle.task}</td>
+                  <td>{cycle.minutesAmount} minutos</td>
+                  <td>
+                    {formatDistanceToNow(cycle.startDate, {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </td>
+                  <td>
+                    {cycle.finishedDate && (
+                      <Status statusColor="green">Concluído</Status>
+                    )}
+                    {cycle.interruptedDate && (
+                      <Status statusColor="red">Interrompido</Status>
+                    )}
+                    {!cycle.finishedDate && !cycle.interruptedDate && (
+                      <Status statusColor="yellow">Em andamento</Status>
+                    )}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </HistoryList>
