@@ -4,15 +4,15 @@ import { GlobalStyle } from './styles/global'
 
 import { Router } from './Router'
 import { BrowserRouter } from 'react-router-dom'
-import { CycleContextProvider } from './context/CyclesContext'
+import { CyclesContextProvider } from './context/CyclesContext'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <CycleContextProvider>
+        <CyclesContextProvider>
           <Router />
-        </CycleContextProvider>
+        </CyclesContextProvider>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>

@@ -1,32 +1,32 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-
 import { HandPalm, Play } from 'phosphor-react'
-import { useContext } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-// import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
-import { CycleContext } from '../../context/CyclesContext'
-import { Countdown } from './components/Countdown'
-import { NewCycleForm } from './components/NewCycleForm'
+import { useContext } from 'react'
+
 import {
   HomeContainer,
   StartCountdownButton,
   StopCountdownButton,
 } from './styles'
+import { NewCycleForm } from './components/NewCycleForm'
+import { Countdown } from './components/Countdown'
+import { CyclesContext } from '../../context/CyclesContext'
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
   minutesAmount: zod
     .number()
-    .min(1, 'O ciclo precisa ser de no mínimo 5 minutos')
-    .max(60, 'O ciclo precisa ser de no máximo 60 minutos'),
+    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos.')
+    .max(60, 'O ciclo precisa ser de no máximo 60 minutos.'),
 })
 
-export type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
+type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
   const { activeCycle, createNewCycle, interruptCurrentCycle } =
-    useContext(CycleContext)
+    useContext(CyclesContext)
+
   const newCycleForm = useForm<NewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
@@ -35,27 +35,15 @@ export function Home() {
     },
   })
 
-  const {
-    handleSubmit,
-    watch,
-    // formState
-    reset,
-  } = newCycleForm
-
-  console.log('newCycleForm', newCycleForm)
-
-  const task = watch('task')
-  const isSubmitDisabled = !task
-
-  // TODO: Create an error space to show the problems
-  // if (formState.errors) console.log(formState.errors)
+  const { handleSubmit, watch, reset } = newCycleForm
 
   function handleCreateNewCycle(data: NewCycleFormData) {
-    console.log('data', data)
-
     createNewCycle(data)
     reset()
   }
+
+  const task = watch('task')
+  const isSubmitDisable = !task
 
   return (
     <HomeContainer>
@@ -63,16 +51,15 @@ export function Home() {
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
-
         <Countdown />
 
         {activeCycle ? (
-          <StopCountdownButton type="button" onClick={interruptCurrentCycle}>
+          <StopCountdownButton onClick={interruptCurrentCycle} type="button">
             <HandPalm size={24} />
             Interromper
           </StopCountdownButton>
         ) : (
-          <StartCountdownButton type="submit" disabled={isSubmitDisabled}>
+          <StartCountdownButton disabled={isSubmitDisable} type="submit">
             <Play size={24} />
             Começar
           </StartCountdownButton>
