@@ -22,6 +22,10 @@ export function Countdown() {
   const [tensSeconds, onesSeconds] = String(secondsAmount).padStart(2, '0')
 
   useEffect(() => {
+    console.log('activeCycle', activeCycle)
+    console.log('activeCycleId', activeCycleId)
+    console.log('totalSeconds', totalSeconds)
+
     let interval: number
     if (activeCycle) {
       interval = setInterval(() => {

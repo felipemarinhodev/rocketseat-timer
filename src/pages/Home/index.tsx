@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { HandPalm, Play } from 'phosphor-react'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 // import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
@@ -42,6 +42,8 @@ export function Home() {
     reset,
   } = newCycleForm
 
+  console.log('newCycleForm', newCycleForm)
+
   const task = watch('task')
   const isSubmitDisabled = !task
 
@@ -49,13 +51,15 @@ export function Home() {
   // if (formState.errors) console.log(formState.errors)
 
   function handleCreateNewCycle(data: NewCycleFormData) {
+    console.log('data', data)
+
     createNewCycle(data)
     reset()
   }
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
+      <form onSubmit={handleSubmit(handleCreateNewCycle)}>
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
